@@ -15,7 +15,7 @@ from pathlib import Path
 
 REPO_URL = "https://github.com/ndw-kkoki/traffic-counting-demo.git"
 REPO_DIR = Path("/kaggle/working/traffic-counting-demo")
-KAGGLE_INPUT = Path("/kaggle/input/road-vehicle-images-dataset/trafic_data")
+KAGGLE_INPUT = Path("/kaggle/input/datasets/ashfakyeafi/road-vehicle-images-dataset/trafic_data")
 
 
 def run(cmd: list[str], cwd: Path | None = None, env: dict | None = None) -> None:
@@ -37,8 +37,6 @@ def main() -> None:
          "--index-url", "https://download.pytorch.org/whl/cu121"])
     run([sys.executable, "-m", "pip", "install", "-q",
          "ultralytics", "lap", "pyyaml", "opencv-python-headless"])
-
-    run(["find", "/kaggle/input", "-maxdepth", "4"])
 
     data_dir = REPO_DIR / "data"
     data_dir.mkdir(exist_ok=True)
