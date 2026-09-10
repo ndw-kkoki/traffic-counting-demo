@@ -104,7 +104,51 @@ curl -X POST "http://127.0.0.1:8000/detect?conf=0.4" \
 
 ## 評価結果
 
-<!-- RESULTS -->
+valid分割(300枚)での評価。Kaggle Notebooks(Tesla P100)でYOLO11nを80epoch分学習
+(patience=15で早期終了設定)。
+
+| 指標 | 値 |
+|---|---|
+| mAP@[.50:.95] | **0.266** |
+| mAP@.50 | **0.425** |
+| 推論速度 | **約4.3ms/枚**(前処理・後処理込みで約7.2ms ≒ 139fps) |
+
+車種によって出現数に偏りがあるデータセットのため(例: policecar・scooterは1枚のみ)、
+主要クラス(car/bus/motorbike/rickshaw/three-wheelers-CNG/truck)はmAP50が0.55〜0.73と
+実用的な精度が出ている一方、レアクラスは0に近い。推論速度は
+[Faster R-CNN版](https://github.com/ndw-kkoki/satellite-object-detection-demo)
+(二段階検出)よりも大幅に高速で、一段階検出のリアルタイム性優位性を裏付けている。
+
+検出例(信頼度閾値0.4):
+
+![intersection multi-class detection example](models/demo_outputs/intersection_detected.jpg)
+
+交差点で car・bus・motorbike・van を同時に正しく検出できている例。
+
+![mixed vehicle types detection example](models/demo_outputs/mixed_vehicles_detected.jpg)
+
+truck・rickshaw・pickup・car など、車種の異なる車両を細かく分類できている例。
+
+### 通過台数カウントの実行結果
+
+Pexels提供のフリー素材動画(学習データとは別の、一般的な高速道路の映像)に対して
+`count_video.py` を実行した結果:
+
+```json
+{
+  "total": 35,
+  "counts": { "car": 29, "van": 3, "minivan": 3 }
+}
+```
+
+学習データはバングラデシュの市街地車両が中心のため、高速道路映像ではrickshaw等の
+現地特有車種は登場せず、car/van/minivanといった共通クラスのみが検出されている
+(ドメインが異なる映像でも主要クラスの検出・追跡・カウントが機能することを確認)。
+
+![vehicle counting on highway video example](models/demo_outputs/counting_preview_2.jpg)
+
+トラッキングID・クラス・信頼度・通過ライン(赤線)・累計カウント(左上)を
+同時に可視化している。
 
 ## テスト
 
