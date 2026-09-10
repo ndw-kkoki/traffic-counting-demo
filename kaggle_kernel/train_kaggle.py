@@ -38,6 +38,8 @@ def main() -> None:
     run([sys.executable, "-m", "pip", "install", "-q",
          "ultralytics", "lap", "pyyaml", "opencv-python-headless"])
 
+    run(["find", "/kaggle/input", "-maxdepth", "4"])
+
     data_dir = REPO_DIR / "data"
     data_dir.mkdir(exist_ok=True)
     (data_dir / "data.yaml").write_text(
