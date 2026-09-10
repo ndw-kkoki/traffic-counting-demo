@@ -1,0 +1,13 @@
+{
+  "id": "kokikijiyama/trafficdet-train-full",
+  "title": "trafficdet-train-full",
+  "code_file": "train_kaggle.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": "true",
+  "enable_gpu": "true",
+  "enable_internet": "true",
+  "dataset_sources": ["ashfakyeafi/road-vehicle-images-dataset"],
+  "competition_sources": [],
+  "kernel_sources": []
+}

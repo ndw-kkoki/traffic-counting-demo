@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+data/train/
+data/valid/
+data/*.yaml
+data/*.mp4
+data/*.zip
+models/run/
+models/counted_output.*
+kaggle_kernel/output*/
+yolo*.pt
+weights/

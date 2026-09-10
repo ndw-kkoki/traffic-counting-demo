@@ -1,0 +1,9 @@
+ultralytics>=8.3
+lap>=0.5.12
+pyyaml>=6.0
+opencv-python-headless>=4.9
+fastapi>=0.110
+uvicorn[standard]>=0.29
+python-multipart>=0.0.9
+pillow>=10.2
+pytest>=8.0
